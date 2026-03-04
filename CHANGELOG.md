@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.4 - 2026-03-04
+
+Fixed:
+
+- kept the stdio MCP process alive after startup so client initialization can complete
+
+## 0.2.3 - 2026-03-04
+
+Fixed:
+
+- fixed the published CLI entry so `npx yuque-mcp-plus` starts the MCP server correctly
+
 ## 0.2.2 - 2026-03-04
 
 Changed:

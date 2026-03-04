@@ -21,7 +21,7 @@ export function createServer() {
   const server = new Server(
     {
       name: "yuque-mcp-plus",
-      version: "0.2.2"
+      version: "0.2.4"
     },
     {
       capabilities: {
@@ -52,4 +52,5 @@ export async function startServer() {
   const server = createServer();
   const transport = new StdioServerTransport();
   await server.connect(transport);
+  await new Promise(() => {});
 }

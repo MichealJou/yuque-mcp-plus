@@ -1,6 +1,6 @@
 {
   "name": "yuque-mcp-plus",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "Yuque MCP server with TOC, parentUuid, move, and multipart support.",
   "author": "michaeljou <864738795@qq.com>",
   "license": "MIT",
