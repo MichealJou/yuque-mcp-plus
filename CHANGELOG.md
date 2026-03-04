@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2 - 2026-03-04
+
+Changed:
+
+- added switchable `node` and `npx` setup examples for Codex, Claude Code, Qoder, OpenCode, and Trae
+
 ## 0.2.1 - 2026-03-04
 
 Changed:
