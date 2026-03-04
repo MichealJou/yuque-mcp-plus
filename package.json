@@ -1,0 +1,17 @@
+{
+  "name": "yuque-mcp-plus",
+  "version": "0.2.0",
+  "description": "Enhanced Yuque MCP server with default repo, TOC tree, parentUuid, and move support.",
+  "type": "module",
+  "bin": {
+    "yuque-mcp-plus": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node ./src/index.js",
+    "check": "node --eval \"import('./src/server.js')\"",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

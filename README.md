@@ -11,6 +11,7 @@
 - 目录节点创建与删除
 - 官方命名兼容别名
 - 通用 OpenAPI 透传 `yuque_request`
+- 通用 multipart 上传透传 `yuque_multipart_request`
 
 英文文档见 [README.en.md](/Users/program/code/code_mcp/yuque-mcp-plus/README.en.md)。
 
@@ -111,6 +112,7 @@ YUQUE_TOKEN = "your-token"
 | --- | --- | --- |
 | `yuque_hello` | 检查服务和 token 是否可用 | 无 |
 | `yuque_request` | 通用 OpenAPI 透传 | `method`, `path`, `params`, `body` |
+| `yuque_multipart_request` | 通用 multipart 上传请求，适合附件类接口 | `method`, `path`, `params`, `fields`, `files` |
 | `yuque_get_user` | 获取当前用户信息 | 无 |
 | `yuque_get_repos` | 获取知识库列表 | `ownerLogin`, `ownerType`, `userId` |
 | `yuque_list_groups` | 获取当前用户或指定用户的团队列表 | `userId` |
@@ -517,6 +519,39 @@ YUQUE_TOKEN = "your-token"
 }
 ```
 
+评论类请求示例：
+
+```json
+{
+  "method": "POST",
+  "path": "/repos/63978478/docs/259413650/comments",
+  "body": {
+    "body": "这是一条评论"
+  }
+}
+```
+
+### `yuque_multipart_request`
+
+附件上传类请求示例：
+
+```json
+{
+  "method": "POST",
+  "path": "/repos/63978478/attachments",
+  "fields": {
+    "type": "file"
+  },
+  "files": [
+    {
+      "fieldName": "file",
+      "filePath": "/absolute/path/to/example.png",
+      "contentType": "image/png"
+    }
+  ]
+}
+```
+
 底层 TOC 更新：
 
 ```json
@@ -543,9 +578,15 @@ YUQUE_TOKEN = "your-token"
 
 ## 已知边界
 
-- 评论和附件暂未封装成专用工具
-- 这两类接口当前建议通过 `yuque_request` 访问
+- 评论暂未封装成专用工具，建议通过 `yuque_request` 访问
+- 附件暂未封装成官方专用工具，但现在可通过 `yuque_multipart_request` 处理上传类接口
 - `yuque_update_repository_toc` 属于底层透传工具，适合高级场景
+
+说明：
+
+- 我已核对官方 `openapi-metadata` 和 `sdk`
+- 其中没有明确公开 comments / attachments 的专用 OpenAPI 定义
+- 所以当前实现选择“补强通用能力”，而不是硬编码猜测端点
 
 ## 真实联调记录
 
