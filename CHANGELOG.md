@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 - 2026-03-04
+
+Changed:
+
+- release as the final recommended version
+
 ## 0.2.4 - 2026-03-04
 
 Fixed:

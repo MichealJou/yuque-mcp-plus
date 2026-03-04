@@ -21,7 +21,7 @@ export function createServer() {
   const server = new Server(
     {
       name: "yuque-mcp-plus",
-      version: "0.2.4"
+      version: "0.3.0"
     },
     {
       capabilities: {
