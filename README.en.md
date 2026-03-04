@@ -96,10 +96,25 @@ Release workflow:
 
 ## Codex MCP Config Example
 
+If you want to switch between the local source tree and the published npm package, only `command + args` need to change.
+
+Source mode:
+
 ```toml
 [mcp_servers.yuque]
 command = "node"
 args = [ "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js" ]
+
+[mcp_servers.yuque.env]
+YUQUE_TOKEN = "your-token"
+```
+
+npm mode:
+
+```toml
+[mcp_servers.yuque]
+command = "npx"
+args = [ "-y", "yuque-mcp-plus" ]
 
 [mcp_servers.yuque.env]
 YUQUE_TOKEN = "your-token"
@@ -113,14 +128,23 @@ The examples below are based on the client docs available on 2026-03-04. UI labe
 
 The current official docs recommend registering a local `stdio` MCP server with a command like this:
 
+Source mode:
+
 ```bash
 claude mcp add --transport stdio yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
+```
+
+npm mode:
+
+```bash
+claude mcp add --transport stdio yuque -- npx -y yuque-mcp-plus
 ```
 
 With environment variables:
 
 ```bash
 claude mcp add --transport stdio --env YUQUE_TOKEN=your-token yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
+claude mcp add --transport stdio --env YUQUE_TOKEN=your-token yuque -- npx -y yuque-mcp-plus
 ```
 
 Useful management commands:
@@ -132,6 +156,8 @@ claude mcp get yuque
 
 If you prefer project-shared config, you can also place this in your project root `.mcp.json`:
 
+Source mode:
+
 ```json
 {
   "mcpServers": {
@@ -139,6 +165,25 @@ If you prefer project-shared config, you can also place this in your project roo
       "command": "node",
       "args": [
         "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "env": {
+        "YUQUE_TOKEN": "${YUQUE_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+npm mode:
+
+```json
+{
+  "mcpServers": {
+    "yuque": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuque-mcp-plus"
       ],
       "env": {
         "YUQUE_TOKEN": "${YUQUE_TOKEN}"
@@ -161,6 +206,8 @@ Path:
 
 Use this project with:
 
+Source mode:
+
 ```json
 {
   "mcpServers": {
@@ -168,6 +215,25 @@ Use this project with:
       "command": "node",
       "args": [
         "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "env": {
+        "YUQUE_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+npm mode:
+
+```json
+{
+  "mcpServers": {
+    "yuque": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "yuque-mcp-plus"
       ],
       "env": {
         "YUQUE_TOKEN": "your-token"
@@ -185,6 +251,8 @@ OpenCode currently configures MCP in `opencode.jsonc`. Local MCP servers belong 
 
 Example:
 
+Source mode:
+
 ```jsonc
 {
   "$schema": "https://opencode.ai/config.json",
@@ -194,6 +262,28 @@ Example:
       "command": [
         "node",
         "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "enabled": true,
+      "environment": {
+        "YUQUE_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+npm mode:
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "yuque": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "yuque-mcp-plus"
       ],
       "enabled": true,
       "environment": {
@@ -223,9 +313,18 @@ Typical flow:
 
 Recommended values:
 
+Source mode:
+
 - Name: `yuque`
 - Command: `node`
 - Args: `/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js`
+- Env: `YUQUE_TOKEN=your-token`
+
+npm mode:
+
+- Name: `yuque`
+- Command: `npx`
+- Args: `-y yuque-mcp-plus`
 - Env: `YUQUE_TOKEN=your-token`
 
 Notes:
