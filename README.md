@@ -13,7 +13,7 @@
 - 通用 OpenAPI 透传 `yuque_request`
 - 通用 multipart 上传透传 `yuque_multipart_request`
 
-英文文档见 [README.en.md](/Users/program/code/code_mcp/yuque-mcp-plus/README.en.md)。
+英文文档见 [README.en.md](README.en.md)。
 
 ## 适用场景
 
