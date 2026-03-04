@@ -40,7 +40,7 @@ Real integration checks have passed for:
 
 Required:
 
-- `YUQUE_PLUS_TOKEN`
+- `YUQUE_TOKEN`
 
 Optional:
 
@@ -67,7 +67,7 @@ npx yuque-mcp-plus
 With environment variables:
 
 ```bash
-YUQUE_PLUS_TOKEN="your-token" npx yuque-mcp-plus
+YUQUE_TOKEN="your-token" npx yuque-mcp-plus
 ```
 
 ```bash
@@ -106,7 +106,7 @@ command = "node"
 args = [ "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js" ]
 
 [mcp_servers.yuque.env]
-YUQUE_PLUS_TOKEN = "your-token"
+YUQUE_TOKEN = "your-token"
 ```
 
 npm mode:
@@ -117,7 +117,7 @@ command = "npx"
 args = [ "-y", "yuque-mcp-plus" ]
 
 [mcp_servers.yuque.env]
-YUQUE_PLUS_TOKEN = "your-token"
+YUQUE_TOKEN = "your-token"
 ```
 
 ## Other Client Integrations
@@ -143,8 +143,8 @@ claude mcp add --transport stdio yuque -- npx -y yuque-mcp-plus
 With environment variables:
 
 ```bash
-claude mcp add --transport stdio --env YUQUE_PLUS_TOKEN=your-token yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
-claude mcp add --transport stdio --env YUQUE_PLUS_TOKEN=your-token yuque -- npx -y yuque-mcp-plus
+claude mcp add --transport stdio --env YUQUE_TOKEN=your-token yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
+claude mcp add --transport stdio --env YUQUE_TOKEN=your-token yuque -- npx -y yuque-mcp-plus
 ```
 
 Useful management commands:
@@ -167,7 +167,7 @@ Source mode:
         "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
       ],
       "env": {
-        "YUQUE_PLUS_TOKEN": "${YUQUE_PLUS_TOKEN}"
+        "YUQUE_TOKEN": "${YUQUE_TOKEN}"
       }
     }
   }
@@ -186,7 +186,7 @@ npm mode:
         "yuque-mcp-plus"
       ],
       "env": {
-        "YUQUE_PLUS_TOKEN": "${YUQUE_PLUS_TOKEN}"
+        "YUQUE_TOKEN": "${YUQUE_TOKEN}"
       }
     }
   }
@@ -217,7 +217,7 @@ Source mode:
         "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
       ],
       "env": {
-        "YUQUE_PLUS_TOKEN": "your-token"
+        "YUQUE_TOKEN": "your-token"
       }
     }
   }
@@ -236,7 +236,7 @@ npm mode:
         "yuque-mcp-plus"
       ],
       "env": {
-        "YUQUE_PLUS_TOKEN": "your-token"
+        "YUQUE_TOKEN": "your-token"
       }
     }
   }
@@ -265,7 +265,7 @@ Source mode:
       ],
       "enabled": true,
       "environment": {
-        "YUQUE_PLUS_TOKEN": "your-token"
+        "YUQUE_TOKEN": "your-token"
       }
     }
   }
@@ -287,7 +287,7 @@ npm mode:
       ],
       "enabled": true,
       "environment": {
-        "YUQUE_PLUS_TOKEN": "your-token"
+        "YUQUE_TOKEN": "your-token"
       }
     }
   }
@@ -318,14 +318,14 @@ Source mode:
 - Name: `yuque`
 - Command: `node`
 - Args: `/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js`
-- Env: `YUQUE_PLUS_TOKEN=your-token`
+- Env: `YUQUE_TOKEN=your-token`
 
 npm mode:
 
 - Name: `yuque`
 - Command: `npx`
 - Args: `-y yuque-mcp-plus`
-- Env: `YUQUE_PLUS_TOKEN=your-token`
+- Env: `YUQUE_TOKEN=your-token`
 
 Notes:
 
@@ -859,11 +859,11 @@ The following scenarios have already been verified against a real Yuque reposito
 
 ## Troubleshooting
 
-### `Missing YUQUE_PLUS_TOKEN`
+### `Missing YUQUE_TOKEN`
 
 Cause:
 
-- `YUQUE_PLUS_TOKEN` was not injected
+- `YUQUE_TOKEN` was not injected
 - the process was started manually without the environment variable
 
 Fix:
@@ -872,7 +872,7 @@ Fix:
 - or launch manually with:
 
 ```bash
-YUQUE_PLUS_TOKEN="your-token" node ./src/index.js
+YUQUE_TOKEN="your-token" node ./src/index.js
 ```
 
 ### `doc not found`

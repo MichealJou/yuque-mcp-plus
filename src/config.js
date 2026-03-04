@@ -13,7 +13,7 @@ function readNumberEnv(name, fallback) {
 }
 
 export function getConfig() {
-  const token = process.env.YUQUE_PLUS_TOKEN || process.env.YUQUE_TOKEN;
+  const token = process.env.YUQUE_TOKEN;
 
   return {
     token,
@@ -29,7 +29,7 @@ export function validateConfig(config = getConfig()) {
   if (!config.token) {
     return {
       isValid: false,
-      error: "Missing YUQUE_PLUS_TOKEN (or legacy YUQUE_TOKEN)"
+      error: "Missing YUQUE_TOKEN"
     };
   }
 
