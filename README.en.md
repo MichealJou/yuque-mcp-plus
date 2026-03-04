@@ -58,6 +58,18 @@ Resolution order:
 
 ## Run
 
+Run directly from npm:
+
+```bash
+npx yuque-mcp-plus
+```
+
+With environment variables:
+
+```bash
+YUQUE_TOKEN="your-token" npx yuque-mcp-plus
+```
+
 ```bash
 node ./src/index.js
 ```
@@ -92,6 +104,135 @@ args = [ "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js" ]
 [mcp_servers.yuque.env]
 YUQUE_TOKEN = "your-token"
 ```
+
+## Other Client Integrations
+
+The examples below are based on the client docs available on 2026-03-04. UI labels and config file locations may change, but the local `stdio` startup model is the same.
+
+### Claude Code
+
+The current official docs recommend registering a local `stdio` MCP server with a command like this:
+
+```bash
+claude mcp add --transport stdio yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
+```
+
+With environment variables:
+
+```bash
+claude mcp add --transport stdio --env YUQUE_TOKEN=your-token yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
+```
+
+Useful management commands:
+
+```bash
+claude mcp list
+claude mcp get yuque
+```
+
+If you prefer project-shared config, you can also place this in your project root `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "yuque": {
+      "command": "node",
+      "args": [
+        "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "env": {
+        "YUQUE_TOKEN": "${YUQUE_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+### Qoder
+
+Qoder currently supports adding MCP servers directly from the settings UI.
+
+Path:
+
+- Open `Qoder Settings`
+- Go to `MCP`
+- Click `+ Add` under `My Servers`
+- Paste the JSON config and save
+
+Use this project with:
+
+```json
+{
+  "mcpServers": {
+    "yuque": {
+      "command": "node",
+      "args": [
+        "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "env": {
+        "YUQUE_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+After saving, a successful connection icon should appear. Use Qoder in `Agent mode` so it can invoke MCP tools.
+
+### OpenCode
+
+OpenCode currently configures MCP in `opencode.jsonc`. Local MCP servers belong under the `mcp` field and must use `type: "local"`.
+
+Example:
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "yuque": {
+      "type": "local",
+      "command": [
+        "node",
+        "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "enabled": true,
+      "environment": {
+        "YUQUE_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+In prompts, you can refer to it explicitly, for example:
+
+```text
+use the yuque tool to list my repositories
+```
+
+### Trae
+
+Trae supports MCP, but I did not find an equally complete public local config file reference like Qoder or OpenCode. So this section uses the most stable UI-based setup path from the currently available public materials.
+
+Typical flow:
+
+- Open the chat box
+- Click the top-right gear icon
+- Open `MCP`
+- Add a local `STDIO` server
+
+Recommended values:
+
+- Name: `yuque`
+- Command: `node`
+- Args: `/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js`
+- Env: `YUQUE_TOKEN=your-token`
+
+Notes:
+
+- The exact entry point and field names may vary by Trae version
+- If your version supports importing JSON config, you can usually reuse the same `mcpServers` structure used for Qoder
+- For manual UI entry, this project only needs `command + args + env`
 
 ## Tool List
 

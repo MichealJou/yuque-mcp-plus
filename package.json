@@ -1,17 +1,46 @@
 {
   "name": "yuque-mcp-plus",
-  "version": "0.2.0",
-  "description": "Enhanced Yuque MCP server with default repo, TOC tree, parentUuid, and move support.",
+  "version": "0.2.1",
+  "description": "Yuque MCP server with TOC, parentUuid, move, and multipart support.",
+  "author": "michaeljou <864738795@qq.com>",
+  "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/MichealJou/yuque-mcp-plus.git"
+  },
+  "homepage": "https://github.com/MichealJou/yuque-mcp-plus#readme",
+  "bugs": {
+    "url": "https://github.com/MichealJou/yuque-mcp-plus/issues"
+  },
+  "keywords": [
+    "mcp",
+    "yuque",
+    "model-context-protocol",
+    "docs",
+    "knowledge-base"
+  ],
   "bin": {
     "yuque-mcp-plus": "./src/index.js"
   },
+  "files": [
+    "src",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "RELEASE.md"
+  ],
   "scripts": {
     "start": "node ./src/index.js",
     "check": "node --eval \"import('./src/server.js')\"",
-    "test": "node --test"
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.4",
+    "axios": "^1.12.2"
   }
 }

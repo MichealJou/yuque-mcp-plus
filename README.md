@@ -1,6 +1,6 @@
 # yuque-mcp-plus
 
-增强版语雀 MCP 服务，默认中文文档。
+语雀 MCP 服务。
 
 它在现有 `yuque-mcp-server` 的基础上补了几类关键能力：
 
@@ -67,6 +67,18 @@
 
 ## 运行方式
 
+通过 npm 直接运行：
+
+```bash
+npx yuque-mcp-plus
+```
+
+如果要带环境变量：
+
+```bash
+YUQUE_TOKEN="your-token" npx yuque-mcp-plus
+```
+
 直接启动：
 
 ```bash
@@ -103,6 +115,135 @@ args = [ "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js" ]
 [mcp_servers.yuque.env]
 YUQUE_TOKEN = "your-token"
 ```
+
+## 其他客户端接入
+
+下面这些示例基于 2026-03-04 当天可查到的客户端文档整理。不同版本的 UI 或配置文件位置可能会变，但本地 `stdio` 启动方式基本一致。
+
+### Claude Code
+
+官方文档当前推荐直接用命令注册本地 `stdio` MCP：
+
+```bash
+claude mcp add --transport stdio yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
+```
+
+如果要带环境变量：
+
+```bash
+claude mcp add --transport stdio --env YUQUE_TOKEN=your-token yuque -- node /Users/program/code/code_mcp/yuque-mcp-plus/src/index.js
+```
+
+常用管理命令：
+
+```bash
+claude mcp list
+claude mcp get yuque
+```
+
+如果你使用项目共享配置，也可以把它写进项目根目录的 `.mcp.json`：
+
+```json
+{
+  "mcpServers": {
+    "yuque": {
+      "command": "node",
+      "args": [
+        "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "env": {
+        "YUQUE_TOKEN": "${YUQUE_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+### Qoder
+
+Qoder 当前支持在设置页里直接添加 MCP。
+
+操作路径：
+
+- 打开 Qoder Settings
+- 进入 `MCP`
+- 在 `My Servers` 里点击 `+ Add`
+- 粘贴 JSON 配置并保存
+
+本项目可直接使用：
+
+```json
+{
+  "mcpServers": {
+    "yuque": {
+      "command": "node",
+      "args": [
+        "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "env": {
+        "YUQUE_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+保存后如果能看到连接图标，说明服务已成功连上。使用时要切到 `Agent mode`，这样 Qoder 才会调用 MCP 工具。
+
+### OpenCode
+
+OpenCode 当前在 `opencode.jsonc` 里配置 MCP。本地 MCP 要放在 `mcp` 字段下，并声明为 `type: "local"`。
+
+示例：
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "yuque": {
+      "type": "local",
+      "command": [
+        "node",
+        "/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js"
+      ],
+      "enabled": true,
+      "environment": {
+        "YUQUE_TOKEN": "your-token"
+      }
+    }
+  }
+}
+```
+
+使用时可以在提示词里直接点名，例如：
+
+```text
+use the yuque tool to list my repositories
+```
+
+### Trae
+
+Trae 已经支持 MCP，但我当前没查到和 Qoder/OpenCode 一样完整公开的本地配置文件格式文档。所以这里按目前公开的接入方式写最稳的 UI 配置步骤。
+
+常见操作路径：
+
+- 打开聊天框
+- 点击右上角齿轮
+- 进入 `MCP`
+- 添加一个本地 `STDIO` 服务
+
+建议填写：
+
+- Name: `yuque`
+- Command: `node`
+- Args: `/Users/program/code/code_mcp/yuque-mcp-plus/src/index.js`
+- Env: `YUQUE_TOKEN=your-token`
+
+说明：
+
+- Trae 的具体入口位置和字段名可能会随版本变化
+- 如果你的版本支持 JSON 配置导入，可以直接复用 Qoder 的那份 `mcpServers` 配置
+- 如果是通过界面逐项填写，本项目本质上只需要 `command + args + env`
 
 ## 工具清单
 

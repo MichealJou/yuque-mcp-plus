@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 - 2026-03-04
+
+Changed:
+
+- simplified the Chinese README title copy to "语雀 MCP 服务"
+- added `npx yuque-mcp-plus` usage to Chinese and English docs
+- updated package metadata description for npm usage
+
 ## 0.2.0 - 2026-03-04
 
 Added:
